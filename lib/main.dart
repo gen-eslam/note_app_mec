@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/helper/db_helper.dart';
 import 'package:note_app/screens/home_layout.dart';
+import 'package:note_app/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeLayout(),
+      home: SplashScreen(),
     );
   }
 }

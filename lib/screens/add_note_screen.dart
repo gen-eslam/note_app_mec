@@ -18,6 +18,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   ColorController colorController = ColorController(
     colors: ColorsManager.colors,
   );
+  DateTime? dateTime = DateTime.now();
+  TimeOfDay? timeOfDay = TimeOfDay.now();
   TextEditingController titleController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   @override
@@ -57,6 +59,50 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             const SizedBox(height: 30),
             PlateColor(
               colorController: colorController,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        firstDate: DateTime.now(),
+                        currentDate: dateTime,
+                        lastDate: DateTime.now().add(
+                          const Duration(
+                            days: 8000,
+                          ),
+                        ),
+                      ).then((value) {
+                        value == null
+                            ? dateTime = DateTime.now()
+                            : dateTime = value;
+                        setState(() {});
+                      });
+                    },
+                    child: Text(dateTime.toString().split(" ")[0]),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      timeOfDay = await showTimePicker(
+                        context: context,
+                        initialTime: timeOfDay!,
+                      ).then((value) {
+                        value == null
+                            ? timeOfDay = TimeOfDay.now()
+                            : timeOfDay = value;
+                        setState(() {});
+                        return null;
+                      });
+                    },
+                    child: Text("${timeOfDay?.format(context)}"),
+                    // intl
+                  ),
+                ),
+              ],
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(

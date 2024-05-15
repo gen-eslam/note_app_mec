@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/helper/cache_helper.dart';
 import 'package:note_app/model/screen_model.dart';
 import 'package:note_app/screens/add_note_screen.dart';
 import 'package:note_app/screens/all_note_sreen.dart';
@@ -38,14 +39,19 @@ class _HomeLayoutState extends State<HomeLayout> {
             color: Colors.white,
           ),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 25.0),
-            child: Icon(
-              Icons.calendar_month,
-              color: Colors.white,
-            ),
-          ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                // bool? isDark = CacheHelper.getDataBool(key: "isDark");
+                // if (isDark == null || isDark == false) {
+                //   CacheHelper.putData(key: "isDark", value: true);
+                // } else {
+                //   CacheHelper.putData(key: "isDark", value: false);
+                // }
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //  );
+              },
+              icon: const Icon(Icons.dark_mode))
         ],
       ),
       body: screenModels[currentIndex].screen,
